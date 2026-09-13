@@ -13,7 +13,6 @@ function App() {
   const [newClass, setNewClass] = useState({
     title: '',
     time: '',
-    meetingUrl: '',
     status: 'live',
   })
   const [uploadedFiles, setUploadedFiles] = useState([])
@@ -129,7 +128,7 @@ function App() {
         return
       }
 
-      setNewClass({ title: '', time: '', meetingUrl: '', status: 'live' })
+      setNewClass({ title: '', time: '', status: 'live' })
       setUploadedFiles([])
       setNotice('Class created successfully.')
       await fetchClasses()
