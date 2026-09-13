@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-const defaultForm = { name: '', email: '', phone: '', password: '' }
+const defaultForm = { name: '', email: '', phone: '', identifier: '', password: '' }
 
 function App() {
   const [authMode, setAuthMode] = useState('login')

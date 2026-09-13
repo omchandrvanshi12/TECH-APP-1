@@ -11,7 +11,7 @@ import Database from 'better-sqlite3'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const app = express()
-const PORT = 4000
+const PORT = Number(process.env.PORT) || 4000
 
 const dbPath = path.join(__dirname, 'data', 'school.db')
 const uploadsDir = path.join(__dirname, 'uploads')
@@ -319,6 +319,14 @@ app.post('/api/classes', upload.array('files', 10), (req, res) => {
     },
   })
 })
+
+const clientDistDir = path.join(__dirname, 'dist')
+if (fs.existsSync(clientDistDir)) {
+  app.use(express.static(clientDistDir))
+  app.get(/^(?!\/api|\/uploads).*/, (_req, res) => {
+    res.sendFile(path.join(clientDistDir, 'index.html'))
+  })
+}
 
 app.listen(PORT, () => {
   console.log(`Future Shadow Classes API running at http://localhost:${PORT}`)
